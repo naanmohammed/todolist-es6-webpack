@@ -11,7 +11,7 @@ function populateTaskList() {
   taskList.innerHTML = '';
 
   const sortedTasks = tasks.sort((a, b) => (a.index - b.index));
-  sortedTasks.forEach(task => {
+  sortedTasks.forEach((task => {
     const listItem = document.createElement('li');
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
@@ -93,7 +93,7 @@ function populateTaskList() {
 
     listItem.setAttribute('data-id', task.id);
     taskList.appendChild(listItem);
-  });
+  }));
 }
 
 window.onload = function () {
