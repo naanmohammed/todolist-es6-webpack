@@ -1,12 +1,9 @@
 import './styles.css';
 import { addTask } from './addTasks.js';
-import { deleteTask } from './deleteTasks.js';
 import { updateTask } from './updateTasks.js';
-import { saveTasksToLocalStorage } from './saveToLocalStorage.js';
 import { getTasksFromLocalStorage } from './getTasksFromLocalStorage.js';
 
-export const tasks = [];
-export default tasks;
+let tasks = [];
 
 function populateTaskList() {
   const taskList = document.getElementById('task-list');
@@ -116,3 +113,12 @@ taskInput.addEventListener('keypress', (event) => {
     saveTasksToLocalStorage();
   }
 });
+
+function saveTasksToLocalStorage() {
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+export function deleteTask(index) {
+  tasks.splice(index, 1);
+  return tasks;
+}
