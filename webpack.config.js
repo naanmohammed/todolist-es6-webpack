@@ -7,7 +7,6 @@ module.exports = {
     index: './src/index.js',
     addtasks: './src/addTasks.js',
     deletetasks: './src/deleteTasks.js',
-    updatetasks: './src/updateTasks.js',
     savetolocalstorage: './src/saveToLocalStorage.js',
     gettasksfromlocalstorage: './src/getTasksFromLocalStorage.js',
   },

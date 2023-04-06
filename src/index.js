@@ -4,15 +4,16 @@ import { deleteTask } from './deleteTasks.js';
 import { saveTasksToLocalStorage } from './saveToLocalStorage.js';
 import { getTasksFromLocalStorage } from './getTasksFromLocalStorage.js';
 
+
+
 let tasks = [];
 
-function populateTaskList(tasks) {
+function populateTaskList() {
   const taskList = document.getElementById('task-list');
   taskList.innerHTML = '';
 
   const sortedTasks = tasks.sort((a, b) => a.index - b.index);
-  for (let i = 0; i < sortedTasks.length; i += 1) {
-    const task = sortedTasks[i];
+  sortedTasks.forEach(task => {
     const listItem = document.createElement('li');
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
@@ -73,7 +74,7 @@ function populateTaskList(tasks) {
           const newDescription = input.value.trim();
           if (newDescription !== '') {
             task.description = newDescription;
-            populateTaskList(tasks);
+            populateTaskList();
             saveTasksToLocalStorage(tasks);
           } else {
             input.parentNode.replaceChild(taskDescription, input);
@@ -88,13 +89,13 @@ function populateTaskList(tasks) {
     deleteButton.addEventListener('click', () => {
       const index = sortedTasks.findIndex((t) => t.description === task.description);
       tasks = deleteTask(tasks, index);
-      populateTaskList(tasks);
+      populateTaskList();
       saveTasksToLocalStorage(tasks);
     });
 
     listItem.setAttribute('data-id', task.id);
     taskList.appendChild(listItem);
-  }
+  });
 }
 
 window.onload = function () {
