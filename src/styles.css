@@ -1,0 +1,89 @@
+body {
+  background-color: lightgray;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  margin-left: 25%;
+  margin-right: 25%;
+  box-shadow: 2px 2px 20px rgba(136, 134, 134, 0.4);
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid lightgray;
+  padding: 1rem 0.5rem;
+}
+
+li {
+  list-style: none;
+}
+
+#task-list li::after {
+  content: "";
+  border-bottom: 1px solid lightgray;
+  display: block;
+  margin-top: 5px;
+}
+
+#task-list li {
+  padding: 1rem 0.25rem;
+}
+
+.add-task {
+  width: 100%;
+  padding: 1rem 0.25rem;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 0.75rem;
+}
+
+.add-task input {
+  width: 90%;
+  border: none;
+  padding-left: 10px;
+}
+
+.add-task input:focus {
+  outline: none;
+}
+
+input::placeholder {
+  color: #999;
+  font-style: italic;
+  font-size: 18px;
+  padding-left: 10px;
+}
+
+.task-menu {
+  float: right;
+  margin-right: 10px;
+  color: rgb(182, 185, 187);
+}
+
+.refresh {
+  color: rgb(182, 185, 187);
+  font-size: 18px;
+}
+
+.list-footer {
+  background-color: rgb(228, 226, 226);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -1rem;
+}
+
+.list-footer button {
+  justify-content: center;
+  border: none;
+  background-color: rgb(228, 226, 226);
+  padding: 1rem 0.5rem;
+  text-align: center;
+}
+
+.checkbox {
+  margin-right: 0.75rem;
+}
