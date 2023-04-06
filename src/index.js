@@ -6,7 +6,7 @@ import { getTasksFromLocalStorage } from './getTasksFromLocalStorage.js';
 
 let tasks = [];
 
-function populateTaskList() {
+function populateTaskList(tasks) {
   const taskList = document.getElementById('task-list');
   taskList.innerHTML = '';
 
@@ -73,7 +73,7 @@ function populateTaskList() {
           const newDescription = input.value.trim();
           if (newDescription !== '') {
             task.description = newDescription;
-            populateTaskList();
+            populateTaskList(tasks);
             saveTasksToLocalStorage(tasks);
           } else {
             input.parentNode.replaceChild(taskDescription, input);
@@ -88,7 +88,7 @@ function populateTaskList() {
     deleteButton.addEventListener('click', () => {
       const index = sortedTasks.findIndex((t) => t.description === task.description);
       tasks = deleteTask(tasks, index);
-      populateTaskList();
+      populateTaskList(tasks);
       saveTasksToLocalStorage(tasks);
     });
 
@@ -99,14 +99,14 @@ function populateTaskList() {
 
 window.onload = function () {
   tasks = getTasksFromLocalStorage();
-  populateTaskList();
+  populateTaskList(tasks);
 };
 
 const taskInput = document.getElementById('task-input');
 taskInput.addEventListener('keypress', (event) => {
   if (event.key === 'Enter') {
     addTask(tasks);
-    populateTaskList();
+    populateTaskList(tasks);
     saveTasksToLocalStorage(tasks)
   };
 });
