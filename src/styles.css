@@ -8,6 +8,7 @@ body {
   background-color: white;
   margin-left: 25%;
   margin-right: 25%;
+  box-shadow: 2px 2px 20px rgba(136, 134, 134, 0.4);
 }
 
 .list-header {
