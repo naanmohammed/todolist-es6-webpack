@@ -1,6 +1,8 @@
 import './styles.css';
 import { addTask } from './addTasks.js';
+import { deleteTask } from './deleteTasks.js';
 import { updateTask } from './updateTasks.js';
+import { saveTasksToLocalStorage } from './saveToLocalStorage.js';
 import { getTasksFromLocalStorage } from './getTasksFromLocalStorage.js';
 
 let tasks = [];
@@ -8,6 +10,10 @@ let tasks = [];
 function populateTaskList() {
   const taskList = document.getElementById('task-list');
   taskList.innerHTML = '';
+
+  if (!Array.isArray(tasks)) {
+    tasks = [];
+  }
   const sortedTasks = tasks.sort((a, b) => a.index - b.index);
 
   for (let i = 0; i < sortedTasks.length; i += 1) {
@@ -43,7 +49,7 @@ function populateTaskList() {
 
     checkbox.addEventListener('click', () => {
       task.completed = checkbox.checked;
-      saveTasksToLocalStorage();
+      saveTasksToLocalStorage(tasks);
       if (task.completed) {
         listItem.classList.add('completed');
       } else {
@@ -74,7 +80,7 @@ function populateTaskList() {
           updateTask(taskId, newDescription);
           taskDescription.innerText = newDescription;
           taskDescriptionInput.blur();
-          saveTasksToLocalStorage();
+          saveTasksToLocalStorage(tasks);
         }
       };
 
@@ -90,9 +96,9 @@ function populateTaskList() {
 
     deleteButton.addEventListener('click', () => {
       const index = sortedTasks.findIndex((t) => t.description === task.description);
-      tasks = deleteTask(index);
+      tasks = deleteTask(tasks, index);
       populateTaskList();
-      saveTasksToLocalStorage();
+      saveTasksToLocalStorage(tasks);
     });
 
     listItem.setAttribute('data-id', task.id);
@@ -110,15 +116,6 @@ taskInput.addEventListener('keypress', (event) => {
   if (event.key === 'Enter') {
     addTask(tasks);
     populateTaskList();
-    saveTasksToLocalStorage();
+    saveTasksToLocalStorage(tasks);
   }
 });
-
-function saveTasksToLocalStorage() {
-  localStorage.setItem('tasks', JSON.stringify(tasks));
-}
-
-function deleteTask(index) {
-  tasks.splice(index, 1);
-  return tasks;
-}
