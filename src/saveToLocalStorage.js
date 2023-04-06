@@ -1,4 +1,5 @@
-import { tasks } from './index.js'
+import { tasks } from './index.js';
+
 export function saveTasksToLocalStorage() {
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }

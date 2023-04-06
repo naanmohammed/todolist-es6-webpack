@@ -1,4 +1,5 @@
-export function deleteTask(tasks, index) {
+import { tasks } from './index.js'
+export function deleteTask(index) {
   tasks.splice(index, 1);
   return tasks;
 }

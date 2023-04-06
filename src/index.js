@@ -5,15 +5,12 @@ import { updateTask } from './updateTasks.js';
 import { saveTasksToLocalStorage } from './saveToLocalStorage.js';
 import { getTasksFromLocalStorage } from './getTasksFromLocalStorage.js';
 
-export let tasks = [];
+export const tasks = [];
+export default tasks;
 
 function populateTaskList() {
   const taskList = document.getElementById('task-list');
   taskList.innerHTML = '';
-
-  if (!Array.isArray(tasks)) {
-    tasks = [];
-  }
   const sortedTasks = tasks.sort((a, b) => a.index - b.index);
 
   for (let i = 0; i < sortedTasks.length; i += 1) {
@@ -96,7 +93,7 @@ function populateTaskList() {
 
     deleteButton.addEventListener('click', () => {
       const index = sortedTasks.findIndex((t) => t.description === task.description);
-      tasks = deleteTask(tasks, index);
+      tasks = deleteTask(index);
       populateTaskList();
       saveTasksToLocalStorage();
     });
