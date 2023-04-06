@@ -3,4 +3,4 @@ export function deleteTask(tasks, index) {
   return tasks;
 }
 
-export default deleteTask;  
+export default deleteTask;

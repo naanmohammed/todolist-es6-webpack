@@ -14,4 +14,4 @@ export function addTask(tasks) {
   }
 }
 
-export default addTask;  
+export default addTask;

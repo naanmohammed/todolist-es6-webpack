@@ -52,8 +52,7 @@ function populateTaskList() {
         listItem.classList.remove('completed');
       }
     });
-    
-
+  
     icon.addEventListener('click', (event) => {
       event.stopPropagation();
       if (menu.style.display === 'none') {
@@ -113,6 +112,6 @@ taskInput.addEventListener('keypress', (event) => {
   if (event.key === 'Enter') {
     addTask(tasks);
     populateTaskList();
-    saveTasksToLocalStorage(tasks)
-  };
+    saveTasksToLocalStorage(tasks);
+  }
 });
