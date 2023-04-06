@@ -1,5 +1,3 @@
-+1-615
-
 import './styles.css';
 import { addTask } from './addTasks.js';
 import { deleteTask } from './deleteTasks.js';
@@ -7,7 +5,7 @@ import { updateTask } from './updateTasks.js';
 import { saveTasksToLocalStorage } from './saveToLocalStorage.js';
 import { getTasksFromLocalStorage } from './getTasksFromLocalStorage.js';
 
-let tasks = [];
+export let tasks = [];
 
 function populateTaskList() {
   const taskList = document.getElementById('task-list');
@@ -51,7 +49,7 @@ function populateTaskList() {
 
     checkbox.addEventListener('click', () => {
       task.completed = checkbox.checked;
-      saveTasksToLocalStorage(tasks);
+      saveTasksToLocalStorage();
       if (task.completed) {
         listItem.classList.add('completed');
       } else {
@@ -59,16 +57,13 @@ function populateTaskList() {
       }
     });
 
-    icon.addEventListener('click', toggleMenuDisplay);
-    function toggleMenuDisplay(event) {
+    icon.addEventListener('click', (event) => {
+      event.stopPropagation();
       if (menu.style.display === 'none') {
         menu.style.display = 'block';
       } else {
         menu.style.display = 'none';
       }
-    }
-    icon.addEventListener('click', (event) => {
-      event.stopPropagation();
     });
 
     updateButton.addEventListener('click', () => {
@@ -85,7 +80,7 @@ function populateTaskList() {
           updateTask(taskId, newDescription);
           taskDescription.innerText = newDescription;
           taskDescriptionInput.blur();
-          saveTasksToLocalStorage(tasks);
+          saveTasksToLocalStorage();
         }
       };
 
@@ -103,7 +98,7 @@ function populateTaskList() {
       const index = sortedTasks.findIndex((t) => t.description === task.description);
       tasks = deleteTask(tasks, index);
       populateTaskList();
-      saveTasksToLocalStorage(tasks);
+      saveTasksToLocalStorage();
     });
 
     listItem.setAttribute('data-id', task.id);
@@ -121,6 +116,6 @@ taskInput.addEventListener('keypress', (event) => {
   if (event.key === 'Enter') {
     addTask(tasks);
     populateTaskList();
-    saveTasksToLocalStorage(tasks);
+    saveTasksToLocalStorage();
   }
 });
