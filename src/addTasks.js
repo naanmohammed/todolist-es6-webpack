@@ -8,7 +8,6 @@ export function addTask(tasks) {
       completed: false,
       index: tasks.length,
     };
-
     tasks.push(newTask);
     taskInput.value = '';
   }

@@ -11,7 +11,11 @@ function populateTaskList() {
   const taskList = document.getElementById('task-list');
   taskList.innerHTML = '';
 
+  if (!Array.isArray(tasks)) {
+    tasks = [];
+  }
   const sortedTasks = tasks.sort((a, b) => a.index - b.index);
+
   for (let i = 0; i < sortedTasks.length; i += 1) {
     const task = sortedTasks[i];
     const listItem = document.createElement('li');
@@ -52,7 +56,7 @@ function populateTaskList() {
         listItem.classList.remove('completed');
       }
     });
-  
+
     icon.addEventListener('click', (event) => {
       event.stopPropagation();
       if (menu.style.display === 'none') {
