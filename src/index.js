@@ -20,7 +20,7 @@ const tasks = [
     description: 'Pay bills',
     completed: false,
     index: 3,
-  }
+  },
 ];
 
 function populateTaskList() {
