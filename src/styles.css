@@ -1,5 +1,5 @@
 body {
-    background-color: lightgray;
+  background-color: lightgray;
 }
 
 #container {
@@ -75,7 +75,7 @@ input::placeholder {
   margin-top: -1rem;
 }
 
-.list-footer button{
+.list-footer button {
   justify-content: center;
   border: none;
   background-color: rgb(228, 226, 226);
