@@ -1,53 +1,49 @@
 import './styles.css';
-import { addTask } from './addTasks.js';
-import { deleteTask } from './deleteTasks.js';
-import { updateTask } from './updateTasks.js';
-import { saveTasksToLocalStorage } from './saveToLocalStorage.js';
-import { getTasksFromLocalStorage } from './getTasksFromLocalStorage.js';
+import {addTask} from './addTasks.js';
+import {deleteTask} from './deleteTasks.js';
+import {saveTasksToLocalStorage} from './saveToLocalStorage';
+import {getTasksFromLocalStorage} from './getTasksFromLocalStorage';
 
 let tasks = [];
 
 function populateTaskList() {
-  const taskList = document.getElementById('task-list');
+  let taskList = document.getElementById('task-list');
   taskList.innerHTML = '';
 
-  if (!Array.isArray(tasks)) {
-    tasks = [];
-  }
   const sortedTasks = tasks.sort((a, b) => a.index - b.index);
-
   for (let i = 0; i < sortedTasks.length; i += 1) {
-    const task = sortedTasks[i];
-    const listItem = document.createElement('li');
-    const checkbox = document.createElement('input');
+    let task = sortedTasks[i];
+    let listItem = document.createElement('li');
+    let checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.classList.add('checkbox');
     checkbox.checked = task.completed;
     listItem.appendChild(checkbox);
-    const taskDescription = document.createElement('span');
+    let taskDescription = document.createElement('span');
     taskDescription.innerText = task.description;
     listItem.appendChild(taskDescription);
     if (task.completed) {
       listItem.classList.add('completed');
     }
-    const icon = document.createElement('i');
+    let icon = document.createElement('i');
     icon.classList.add('fa');
     icon.classList.add('task-menu');
     icon.innerHTML = '&#xf142;';
+    icon.style
     listItem.appendChild(icon);
 
-    const menu = document.createElement('div');
+    let menu = document.createElement('div');
     menu.classList.add('menu');
     menu.style.display = 'none';
-    const updateButton = document.createElement('button');
+    let updateButton = document.createElement('button');
     updateButton.innerText = 'Update';
     menu.appendChild(updateButton);
-    const deleteButton = document.createElement('button');
+    let deleteButton = document.createElement('button');
     deleteButton.innerText = 'Delete';
     menu.appendChild(deleteButton);
     listItem.appendChild(menu);
 
-    checkbox.addEventListener('click', () => {
+    checkbox.addEventListener('click', function () {
       task.completed = checkbox.checked;
       saveTasksToLocalStorage(tasks);
       if (task.completed) {
@@ -57,7 +53,7 @@ function populateTaskList() {
       }
     });
 
-    icon.addEventListener('click', (event) => {
+    icon.addEventListener('click', function (event) {
       event.stopPropagation();
       if (menu.style.display === 'none') {
         menu.style.display = 'block';
@@ -66,35 +62,31 @@ function populateTaskList() {
       }
     });
 
-    updateButton.addEventListener('click', () => {
-      const taskId = listItem.getAttribute('data-id');
-      const taskDescriptionInput = document.createElement('input');
-      taskDescriptionInput.type = 'text';
-      taskDescriptionInput.value = taskDescription.innerText;
-      taskDescription.parentNode.replaceChild(taskDescriptionInput, taskDescription);
-      taskDescriptionInput.focus();
-
-      const onEnterKeyPress = function (event) {
-        if (event.key === 'Enter') {
-          const newDescription = taskDescriptionInput.value;
-          updateTask(taskId, newDescription);
-          taskDescription.innerText = newDescription;
-          taskDescriptionInput.blur();
-          saveTasksToLocalStorage(tasks);
-        }
-      };
-
-      taskDescriptionInput.addEventListener('keypress', onEnterKeyPress);
-
-      taskDescriptionInput.addEventListener('blur', () => {
-        taskDescriptionInput.removeEventListener('keypress', onEnterKeyPress);
-        taskDescriptionInput.parentNode.replaceChild(taskDescription, taskDescriptionInput);
-      });
-
+    updateButton.addEventListener('click', function (event) {
+      event.stopPropagation();
       menu.style.display = 'none';
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.value = task.description;
+      taskDescription.parentNode.replaceChild(input, taskDescription);
+      input.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+          const newDescription = input.value.trim();
+          if (newDescription !== '') {
+            task.description = newDescription;
+            populateTaskList();
+            saveTasksToLocalStorage(tasks);
+          } else {
+            input.parentNode.replaceChild(taskDescription, input);
+          }
+        } else if (event.key === 'Escape') {
+          input.parentNode.replaceChild(taskDescription, input);
+        }
+      });
+      input.focus();
     });
-
-    deleteButton.addEventListener('click', () => {
+    
+    deleteButton.addEventListener('click', function () {
       const index = sortedTasks.findIndex((t) => t.description === task.description);
       tasks = deleteTask(tasks, index);
       populateTaskList();
@@ -112,10 +104,10 @@ window.onload = function () {
 };
 
 const taskInput = document.getElementById('task-input');
-taskInput.addEventListener('keypress', (event) => {
+taskInput.addEventListener('keypress', function (event) {
   if (event.key === 'Enter') {
     addTask(tasks);
     populateTaskList();
-    saveTasksToLocalStorage(tasks);
+    saveTasksToLocalStorage(tasks)
   }
 });
