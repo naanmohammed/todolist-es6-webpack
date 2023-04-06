@@ -4,15 +4,13 @@ import { deleteTask } from './deleteTasks.js';
 import { saveTasksToLocalStorage } from './saveToLocalStorage.js';
 import { getTasksFromLocalStorage } from './getTasksFromLocalStorage.js';
 
-
-
 let tasks = [];
 
 function populateTaskList() {
   const taskList = document.getElementById('task-list');
   taskList.innerHTML = '';
 
-  const sortedTasks = tasks.sort((a, b) => a.index - b.index);
+  const sortedTasks = tasks.sort((a, b) => (a.index - b.index));
   sortedTasks.forEach(task => {
     const listItem = document.createElement('li');
     const checkbox = document.createElement('input');
@@ -53,7 +51,7 @@ function populateTaskList() {
       }
     });
 
-    icon.addEventListener('click', function (event) {
+    icon.addEventListener('click', (event) => {
       event.stopPropagation();
       if (menu.style.display === 'none') {
         menu.style.display = 'block';
@@ -62,7 +60,7 @@ function populateTaskList() {
       }
     });
 
-    updateButton.addEventListener('click', function (event) {
+    updateButton.addEventListener('click', (event) => {
       event.stopPropagation();
       menu.style.display = 'none';
       const input = document.createElement('input');
@@ -108,6 +106,6 @@ taskInput.addEventListener('keypress', (event) => {
   if (event.key === 'Enter') {
     addTask(tasks);
     populateTaskList(tasks);
-    saveTasksToLocalStorage(tasks)
-  };
+    saveTasksToLocalStorage(tasks);
+  }
 });
