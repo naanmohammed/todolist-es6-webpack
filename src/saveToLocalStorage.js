@@ -1,5 +1,5 @@
 export function saveTasksToLocalStorage(tasks) {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  }
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+}
 
-  export default saveTasksToLocalStorage;
+export default saveTasksToLocalStorage;

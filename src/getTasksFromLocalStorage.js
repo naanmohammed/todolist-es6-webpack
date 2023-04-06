@@ -1,8 +1,8 @@
 export function getTasksFromLocalStorage() {
-    const tasksString = localStorage.getItem('tasks');
-    if (tasksString) {
+  const tasksString = localStorage.getItem('tasks');
+  if (tasksString) {
       return JSON.parse(tasksString);
-    } else {
-      return [];
-    }
   }
+}
+
+export default getTasksFromLocalStorage;
