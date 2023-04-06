@@ -1,49 +1,48 @@
 import './styles.css';
-import {addTask} from './addTasks.js';
-import {deleteTask} from './deleteTasks.js';
-import {saveTasksToLocalStorage} from './saveToLocalStorage';
-import {getTasksFromLocalStorage} from './getTasksFromLocalStorage';
+import { addTask } from './addTasks.js';
+import { deleteTask } from './deleteTasks.js';
+import { saveTasksToLocalStorage } from './saveToLocalStorage.js';
+import { getTasksFromLocalStorage } from './getTasksFromLocalStorage.js';
 
 let tasks = [];
 
 function populateTaskList() {
-  let taskList = document.getElementById('task-list');
+  const taskList = document.getElementById('task-list');
   taskList.innerHTML = '';
 
   const sortedTasks = tasks.sort((a, b) => a.index - b.index);
   for (let i = 0; i < sortedTasks.length; i += 1) {
-    let task = sortedTasks[i];
-    let listItem = document.createElement('li');
-    let checkbox = document.createElement('input');
+    const task = sortedTasks[i];
+    const listItem = document.createElement('li');
+    const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.classList.add('checkbox');
     checkbox.checked = task.completed;
     listItem.appendChild(checkbox);
-    let taskDescription = document.createElement('span');
+    const taskDescription = document.createElement('span');
     taskDescription.innerText = task.description;
     listItem.appendChild(taskDescription);
     if (task.completed) {
       listItem.classList.add('completed');
     }
-    let icon = document.createElement('i');
+    const icon = document.createElement('i');
     icon.classList.add('fa');
     icon.classList.add('task-menu');
     icon.innerHTML = '&#xf142;';
-    icon.style
     listItem.appendChild(icon);
 
-    let menu = document.createElement('div');
+    const menu = document.createElement('div');
     menu.classList.add('menu');
     menu.style.display = 'none';
-    let updateButton = document.createElement('button');
+    const updateButton = document.createElement('button');
     updateButton.innerText = 'Update';
     menu.appendChild(updateButton);
-    let deleteButton = document.createElement('button');
+    const deleteButton = document.createElement('button');
     deleteButton.innerText = 'Delete';
     menu.appendChild(deleteButton);
     listItem.appendChild(menu);
 
-    checkbox.addEventListener('click', function () {
+    checkbox.addEventListener('click', () => {
       task.completed = checkbox.checked;
       saveTasksToLocalStorage(tasks);
       if (task.completed) {
@@ -69,7 +68,7 @@ function populateTaskList() {
       input.type = 'text';
       input.value = task.description;
       taskDescription.parentNode.replaceChild(input, taskDescription);
-      input.addEventListener('keydown', function (event) {
+      input.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
           const newDescription = input.value.trim();
           if (newDescription !== '') {
@@ -85,8 +84,8 @@ function populateTaskList() {
       });
       input.focus();
     });
-    
-    deleteButton.addEventListener('click', function () {
+
+    deleteButton.addEventListener('click', () => {
       const index = sortedTasks.findIndex((t) => t.description === task.description);
       tasks = deleteTask(tasks, index);
       populateTaskList();
@@ -104,10 +103,10 @@ window.onload = function () {
 };
 
 const taskInput = document.getElementById('task-input');
-taskInput.addEventListener('keypress', function (event) {
+taskInput.addEventListener('keypress', (event) => {
   if (event.key === 'Enter') {
     addTask(tasks);
     populateTaskList();
     saveTasksToLocalStorage(tasks)
-  }
+  };
 });
