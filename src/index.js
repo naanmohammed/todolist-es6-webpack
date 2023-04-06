@@ -1,3 +1,5 @@
++1-615
+
 import './styles.css';
 import { addTask } from './addTasks.js';
 import { deleteTask } from './deleteTasks.js';
@@ -7,7 +9,7 @@ import { getTasksFromLocalStorage } from './getTasksFromLocalStorage.js';
 
 let tasks = [];
 
-function populateTaskList(tasks) {
+function populateTaskList() {
   const taskList = document.getElementById('task-list');
   taskList.innerHTML = '';
 
@@ -57,13 +59,16 @@ function populateTaskList(tasks) {
       }
     });
 
-    icon.addEventListener('click', (event) => {
-      event.stopPropagation();
+    icon.addEventListener('click', toggleMenuDisplay);
+    function toggleMenuDisplay(event) {
       if (menu.style.display === 'none') {
         menu.style.display = 'block';
       } else {
         menu.style.display = 'none';
       }
+    }
+    icon.addEventListener('click', (event) => {
+      event.stopPropagation();
     });
 
     updateButton.addEventListener('click', () => {
@@ -97,7 +102,7 @@ function populateTaskList(tasks) {
     deleteButton.addEventListener('click', () => {
       const index = sortedTasks.findIndex((t) => t.description === task.description);
       tasks = deleteTask(tasks, index);
-      populateTaskList(tasks);
+      populateTaskList();
       saveTasksToLocalStorage(tasks);
     });
 
@@ -108,14 +113,14 @@ function populateTaskList(tasks) {
 
 window.onload = function () {
   tasks = getTasksFromLocalStorage();
-  populateTaskList(tasks);
+  populateTaskList();
 };
 
 const taskInput = document.getElementById('task-input');
 taskInput.addEventListener('keypress', (event) => {
   if (event.key === 'Enter') {
     addTask(tasks);
-    populateTaskList(tasks);
+    populateTaskList();
     saveTasksToLocalStorage(tasks);
   }
 });
