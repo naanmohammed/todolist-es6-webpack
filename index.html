@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script defer="defer" src="main.js"></script>
+  <script defer src="runtime.bundle.js"></script><script defer src="index.bundle.js"></script><script defer src="addtasks.bundle.js"></script><script defer src="deletetasks.bundle.js"></script><script defer src="savetolocalstorage.bundle.js"></script><script defer src="gettasksfromlocalstorage.bundle.js"></script></head>
+  <body>
+    <section id="container">
+      <div class="list-header">
+        <li>Today's To Do</li>
+        <i class="refresh fa">&#xf021;</i>
+      </div>
+      <div class="add-task">
+        <input type="text" id="task-input" placeholder="Add to your list...">
+      </div>
+      <div id="task-list">
+      </div>
+      <div class="list-footer">
+        <button class="clear-button">Clear all completed</button>
+      </div>
+    </section>
+  </body>
+</html>
