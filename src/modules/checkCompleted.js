@@ -1,21 +1,13 @@
-import { saveTasksToLocalStorage } from './saveToLocalStorage.js';
+import {saveTasksToLocalStorage} from './saveToLocalStorage';
 
-export function checkCompleted(tasks, taskId) {
-  if (!tasks || tasks.length === 0) {
-    return;
+export function checkCompleted(task, checkbox, listItem, tasks) {
+  task.completed = checkbox.checked;
+  saveTasksToLocalStorage(tasks);
+  if (task.completed) {
+    listItem.classList.add('completed');
+  } else {
+    listItem.classList.remove('completed');
   }
-  const taskIndex = tasks.findIndex((task) => task.id === taskId);
-  if (taskIndex !== -1) {
-    const task = tasks[taskIndex];
-    if (task.completed) {
-      task.completed = false;
-    } else {
-      task.completed = true;
-    }
-    saveTasksToLocalStorage(tasks);
-    return true;
-  }
-  return false;
 }
 
-export default checkCompleted();
+export default checkCompleted;
