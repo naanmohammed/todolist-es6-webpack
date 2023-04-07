@@ -3,7 +3,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.js',
+  entry: {
+    index: './src/index.js',
+    addtasks: './src/addTasks.js',
+    deletetasks: './src/deleteTasks.js',
+    savetolocalstorage: './src/saveToLocalStorage.js',
+    gettasksfromlocalstorage: './src/getTasksFromLocalStorage.js',
+  },
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),

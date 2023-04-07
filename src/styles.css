@@ -61,6 +61,7 @@ input::placeholder {
   float: right;
   margin-right: 10px;
   color: rgb(182, 185, 187);
+  cursor: pointer;
 }
 
 .refresh {
@@ -86,4 +87,18 @@ input::placeholder {
 
 .checkbox {
   margin-right: 0.75rem;
+}
+
+.menu {
+  float: right;
+  margin-right: 10px;
+  color: rgb(182, 185, 187);
+}
+
+.menu button {
+  border: none;
+  background-color: rgb(228, 226, 226);
+  padding: 2.5px 5px;
+  margin: 2px;
+  cursor: pointer;
 }
