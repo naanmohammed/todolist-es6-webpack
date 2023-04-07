@@ -87,7 +87,7 @@ function populateTaskList() {
     deleteButton.addEventListener('click', () => {
       const index = sortedTasks.findIndex((t) => t.description === task.description);
       tasks = deleteTask(tasks, index);
-      for (let j = 0; j < tasks.length; j += 1) {
+      for (let j = 1; j < tasks.length; j += 1) {
         tasks[j].index = j;
       }
       populateTaskList();

@@ -6,7 +6,7 @@ export function addTask(tasks) {
     const newTask = {
       description: taskDescription,
       completed: false,
-      index: tasks.length,
+      index: tasks.length + 1,
     };
     tasks.push(newTask);
     taskInput.value = '';
