@@ -4,6 +4,7 @@ import { deleteTask } from './modules/deleteTasks.js';
 import { saveTasksToLocalStorage } from './modules/saveToLocalStorage.js';
 import { getTasksFromLocalStorage } from './modules/getTasksFromLocalStorage.js';
 import { checkCompleted } from './modules/checkCompleted';
+import { clearCompletedTasks} from './modules/clearCompletedTasks'
 
 let tasks = [];
 
@@ -107,4 +108,13 @@ taskInput.addEventListener('keypress', (event) => {
     populateTaskList(tasks);
     saveTasksToLocalStorage(tasks);
   }
+});
+
+const clearButton = document.getElementById('clear-button');
+clearButton.addEventListener('click', () => {
+  tasks = clearCompletedTasks(tasks);
+  for (let j = 1; j < tasks.length; j += 1) {
+    tasks[j].index = j;
+  }
+  populateTaskList(tasks);
 });
