@@ -5,10 +5,10 @@ module.exports = {
   mode: 'development',
   entry: {
     index: './src/index.js',
-    addtasks: './src/addTasks.js',
-    deletetasks: './src/deleteTasks.js',
-    savetolocalstorage: './src/saveToLocalStorage.js',
-    gettasksfromlocalstorage: './src/getTasksFromLocalStorage.js',
+    addtasks: './src/modules/addTasks.js',
+    deletetasks: './src/modules/deleteTasks.js',
+    savetolocalstorage: './src/modules/saveToLocalStorage.js',
+    gettasksfromlocalstorage: './src/modules/getTasksFromLocalStorage.js',
   },
   output: {
     filename: '[name].bundle.js',
