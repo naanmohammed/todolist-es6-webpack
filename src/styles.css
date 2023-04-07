@@ -102,3 +102,15 @@ input::placeholder {
   margin: 2px;
   cursor: pointer;
 }
+
+#clear-button:hover {
+  cursor: pointer;
+  background-color: rgb(182, 185, 187);
+  color: white;
+}
+
+#clear-button:active {
+  cursor: pointer;
+  background-color: black;
+  color: white;
+}
