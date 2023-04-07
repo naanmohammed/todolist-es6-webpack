@@ -52,7 +52,7 @@ HTML, CSS, and Javascript
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Live Demo
-A live demo of this project will soon be available on netlify and github pages.
+A live demo of this project is available at https://naanmohammed.github.io/todolist-es6-webpack/
   
 
 <!-- GETTING STARTED -->
