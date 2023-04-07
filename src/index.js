@@ -26,20 +26,9 @@ function populateTaskList() {
       listItem.classList.add('completed');
     }
 
-    // checkbox.addEventListener('click', () => {
-    //   task.completed = checkbox.checked;
-    //   saveTasksToLocalStorage(tasks);
-    //   if (task.completed) {
-    //     listItem.classList.add('completed');
-    //   } else {
-    //     listItem.classList.remove('completed');
-    //   }
-    // });   
-
     checkbox.addEventListener('click', () => {
       checkCompleted(task, checkbox, listItem, tasks);
     });
-
 
     const icon = document.createElement('i');
     icon.classList.add('fa');

@@ -1,4 +1,4 @@
-import {saveTasksToLocalStorage} from './saveToLocalStorage';
+import { saveTasksToLocalStorage } from './saveToLocalStorage.js';
 
 export function checkCompleted(task, checkbox, listItem, tasks) {
   task.completed = checkbox.checked;
