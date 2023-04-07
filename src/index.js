@@ -4,7 +4,7 @@ import { deleteTask } from './modules/deleteTasks.js';
 import { saveTasksToLocalStorage } from './modules/saveToLocalStorage.js';
 import { getTasksFromLocalStorage } from './modules/getTasksFromLocalStorage.js';
 import { checkCompleted } from './modules/checkCompleted';
-import { clearCompletedTasks} from './modules/clearCompletedTasks'
+import { clearCompletedTasks } from './modules/clearCompletedTasks';
 
 let tasks = [];
 
