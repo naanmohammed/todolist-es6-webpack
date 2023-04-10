@@ -1,10 +1,8 @@
 import './styles.css';
-import { addTask } from './modules/addTasks.js';
-import { deleteTask } from './modules/deleteTasks.js';
-import { saveTasksToLocalStorage } from './modules/saveToLocalStorage.js';
-import { getTasksFromLocalStorage } from './modules/getTasksFromLocalStorage.js';
-import { checkCompleted } from './modules/checkCompleted';
-import { clearCompletedTasks } from './modules/clearCompletedTasks';
+import { addTask } from './addTasks.js';
+import { deleteTask } from './deleteTasks.js';
+import { saveTasksToLocalStorage } from './saveToLocalStorage.js';
+import { getTasksFromLocalStorage } from './getTasksFromLocalStorage.js';
 
 let tasks = [];
 
@@ -26,11 +24,6 @@ function populateTaskList() {
     if (task.completed) {
       listItem.classList.add('completed');
     }
-
-    checkbox.addEventListener('click', () => {
-      checkCompleted(task, checkbox, listItem, tasks);
-    });
-
     const icon = document.createElement('i');
     icon.classList.add('fa');
     icon.classList.add('task-menu');
@@ -47,6 +40,16 @@ function populateTaskList() {
     deleteButton.innerText = 'Delete';
     menu.appendChild(deleteButton);
     listItem.appendChild(menu);
+
+    checkbox.addEventListener('click', () => {
+      task.completed = checkbox.checked;
+      saveTasksToLocalStorage(tasks);
+      if (task.completed) {
+        listItem.classList.add('completed');
+      } else {
+        listItem.classList.remove('completed');
+      }
+    });
 
     icon.addEventListener('click', (event) => {
       event.stopPropagation();
@@ -108,13 +111,4 @@ taskInput.addEventListener('keypress', (event) => {
     populateTaskList(tasks);
     saveTasksToLocalStorage(tasks);
   }
-});
-
-const clearButton = document.getElementById('clear-button');
-clearButton.addEventListener('click', () => {
-  tasks = clearCompletedTasks(tasks);
-  for (let j = 1; j < tasks.length; j += 1) {
-    tasks[j].index = j;
-  }
-  populateTaskList(tasks);
 });
