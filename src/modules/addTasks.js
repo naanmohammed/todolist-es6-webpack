@@ -1,4 +1,4 @@
-export function addTask(tasks) {
+function addTask(tasks) {
   const taskInput = document.getElementById('task-input');
   const taskDescription = taskInput.value.trim();
 
@@ -13,4 +13,4 @@ export function addTask(tasks) {
   }
 }
 
-export default addTask;
+module.exports = addTask;
