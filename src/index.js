@@ -1,6 +1,7 @@
 import './styles.css';
 import { addTask } from './modules/addTasks.js';
 import { deleteTask } from './modules/deleteTasks.js';
+import { saveTasksToLocalStorage } from './modules/saveToLocalStorage.js';
 import { getTasksFromLocalStorage } from './modules/getTasksFromLocalStorage.js';
 import { checkCompleted } from './modules/checkCompleted';
 import { clearCompletedTasks } from './modules/clearCompletedTasks';
@@ -69,7 +70,7 @@ function populateTaskList() {
           if (newDescription !== '') {
             task.description = newDescription;
             populateTaskList();
-            localStorage.setItem('tasks', JSON.stringify(tasks));
+            saveTasksToLocalStorage(tasks);
           } else {
             input.parentNode.replaceChild(taskDescription, input);
           }
@@ -87,7 +88,7 @@ function populateTaskList() {
         tasks[j].index = j;
       }
       populateTaskList();
-      localStorage.setItem('tasks', JSON.stringify(tasks));
+      saveTasksToLocalStorage(tasks);
     });
 
     listItem.setAttribute('data-id', task.id);
@@ -105,6 +106,7 @@ taskInput.addEventListener('keypress', (event) => {
   if (event.key === 'Enter') {
     addTask(tasks);
     populateTaskList(tasks);
+    saveTasksToLocalStorage(tasks);
   }
 });
 

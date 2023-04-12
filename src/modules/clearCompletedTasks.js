@@ -1,3 +1,4 @@
+import { saveTasksToLocalStorage } from './saveToLocalStorage';
 import { getTasksFromLocalStorage } from './getTasksFromLocalStorage';
 
 export function clearCompletedTasks(tasks) {
@@ -9,7 +10,7 @@ export function clearCompletedTasks(tasks) {
     }
   });
   const newTasks = tasks.filter(((task) => !task.completed));
-  localStorage.setItem('tasks', JSON.stringify(tasks));
+  saveTasksToLocalStorage(newTasks);
   getTasksFromLocalStorage(tasks);
   return newTasks;
 }
