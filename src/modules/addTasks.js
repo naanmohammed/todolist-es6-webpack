@@ -10,7 +10,9 @@ export function addTask(tasks) {
     };
     tasks.push(newTask);
     taskInput.value = '';
+    localStorage.setItem('tasks', JSON.stringify(tasks));
   }
+  return tasks;
 }
 
 export default addTask;
