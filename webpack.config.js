@@ -11,6 +11,7 @@ module.exports = {
     gettasksfromlocalstorage: './src/modules/getTasksFromLocalStorage.js',
     checkcompleted: './src/modules/checkCompleted.js',
     clearcompletedtasks: './src/modules/clearCompletedTasks.js',
+    updateTaskDescription: './src/modules/updateTaskDescription.js'
   },
   output: {
     filename: '[name].bundle.js',
