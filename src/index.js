@@ -1,6 +1,7 @@
 import './styles.css';
 import { addTask } from './modules/addTasks.js';
 import { deleteTask } from './modules/deleteTasks.js';
+import { updateTaskDescription} from './modules/updateTaskDescription';
 import { saveTasksToLocalStorage } from './modules/saveToLocalStorage.js';
 import { getTasksFromLocalStorage } from './modules/getTasksFromLocalStorage.js';
 import { checkCompleted } from './modules/checkCompleted';
@@ -58,27 +59,8 @@ function populateTaskList() {
     });
 
     updateButton.addEventListener('click', (event) => {
-      event.stopPropagation();
-      menu.style.display = 'none';
-      const input = document.createElement('input');
-      input.type = 'text';
-      input.value = task.description;
-      taskDescription.parentNode.replaceChild(input, taskDescription);
-      input.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-          const newDescription = input.value.trim();
-          if (newDescription !== '') {
-            task.description = newDescription;
-            populateTaskList();
-            saveTasksToLocalStorage(tasks);
-          } else {
-            input.parentNode.replaceChild(taskDescription, input);
-          }
-        } else if (event.key === 'Escape') {
-          input.parentNode.replaceChild(taskDescription, input);
-        }
-      });
-      input.focus();
+      updateTaskDescription(event, menu, taskDescription, task, populateTaskList, saveTasksToLocalStorage);
+      saveTasksToLocalStorage(tasks);
     });
 
     deleteButton.addEventListener('click', () => {
